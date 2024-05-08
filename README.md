@@ -8,22 +8,17 @@
 
 
 ## Statement of need
-The current implementation of *GapFind* and *GapFill* is in GAMS, which charges a significant amount of license fee from each single user, even though many solvers are free for academic purpose.
-To promote the usage of this computational tool, we developed this open-source Julia package, `GapFindFill.jl`, to enable researchers to use *GapFind* and *GapFill* for free by harnessing the power of academic free solvers provided by [Gurobi](https://www.gurobi.com/) and [IBM](https://www.ibm.com/analytics/cplex-optimizer).
+The current implementation of `GapFind` and `GapFill` is in GAMS, which charges a significant license fee from each user, even though many solvers are free for academic purposes. To promote the usage of this computational tool, we developed this open-source Julia package, `GapFindFill.jl`, to enable researchers to use *GapFind* and *GapFill* for free by harnessing the power of academic free solvers provided by [Gurobi](https://www.gurobi.com/) and [IBM](https://www.ibm.com/analytics/cplex-optimizer).
 `GapFindFill.jl` is implemented in Julia and makes use of the high-level interface [JuMP.jl](https://github.com/JuliaOpt/JuMP.jl).
-JuMP is a domain-specific modeling language for mathematical optimization embedded in Julia.
-With JuMP, it is easier for users to specify and call different optimizers to solve optimization problems in `GapFindFill.jl` than using interfaces provided by solvers directly.
-Built upon the generic high-level programming language Julia, users can embed `GapFindFill.jl` in their complex work flows to simplify task processing. While GAMS, as a specific optimization tool, does not provide support for processing other tasks, nor being able to be integrated with other programming languages.
+JuMP is a domain-specific modeling language for mathematical optimization embedded in Julia. With JuMP, it is easier for users to specify and call different optimizers to solve optimization problems in `GapFindFill.jl` than using interfaces provided by solvers directly. Built upon the generic high-level programming language Julia, users can embed `GapFindFill.jl` in their complex workflows to simplify task processing. GAMS, as a specific optimization tool, does not provide support for processing other tasks or integrate with other programming languages.
 
 
 ## Installation instruction
-**Requirement**.
-In order to use SEML, the user needs to [install Julia](https://julialang.org/downloads/platform.html) first. This version is built on [Julia v1.1](https://julialang.org/downloads/oldreleases.html).
-[Gurobi.jl](https://github.com/JuliaOpt/Gurobi.jl) is used in GapFindFill.jl as the default solver for both gap finding and filling. [Gurobi](http://www.gurobi.com/) provides free academic license for non-commercial use.
-Users can also choose to use [GLPK.jl](https://github.com/JuliaOpt/GLPK.jl) or [CPLEX.jl](https://github.com/JuliaOpt/CPLEX.jl) for gap finding. GLPK is free for all users, while CPLEX provides free academic license. But note that comparing to Gurobi and CPLEX, it takes GLPK much more time and memory to solve the same problem.
-For gap filling, Gurobi is set as the only solver since it worked way better than the other two in our tests.
+To use this package, the user needs to [install Julia](https://julialang.org/downloads/platform.html) first. This version is built on [Julia v1.1](https://julialang.org/downloads/oldreleases.html).
+[Gurobi.jl](https://github.com/JuliaOpt/Gurobi.jl) is used in GapFindFill.jl as the default solver for both gap finding and filling. [Gurobi](http://www.gurobi.com/) provides a free academic license for non-commercial use.
+Users can also choose to use [GLPK.jl](https://github.com/JuliaOpt/GLPK.jl) or [CPLEX.jl](https://github.com/JuliaOpt/CPLEX.jl) for gap finding. GLPK is free for all users, while CPLEX provides a free academic license. But note that compared to Gurobi and CPLEX, it takes GLPK much more time and memory to solve the same problem. For gap filling, Gurobi is set as the only solver since it worked way better than the other two in our tests.
 
-For [Julia v1.0](https://julialang.org/downloads/) users, any package compatibility issues while testing GapFindFill.jl can be resolved through pinning CPLEX.jl and Gurobi.jl to a specific version by running following commands in `pkg>` mode:
+For [Julia v1.0](https://julialang.org/downloads/) users, any package compatibility issues while testing GapFindFill.jl can be resolved by pinning CPLEX.jl and Gurobi.jl to a specific version by running the following commands in `pkg>` mode:
 ```julia
 pin Gurobi@0.6.0
 pin CPLEX@0.5.0
@@ -33,7 +28,7 @@ For [Julia v1.2](https://julialang.org/downloads/) users, GapFindFill.jl will be
 
 **Installation**.
 Within Julia, press `]` to enter `pkg>` mode.
-To install GapFindFill.jl, issue
+To install GapFindFill.jl, issue the command:
 ```julia
 add GapFindFill
 ```
@@ -67,8 +62,8 @@ Two examples are provided under [test](https://github.com/varnerlab/GapFindFill/
 [testGapFill.jl](https://github.com/varnerlab/GapFindFill/blob/master/test/testGapFill.jl) demonstrate how to set up *GapFind* and *GapFill* models, respectively.
 We reported our experimental results here for users' reference. All experiments were run on an Intel Core i7-6700 CPU with Ubuntu 18.04.3 LTS.
 
-For *find_gaps*, the testing example contains 1668 compounds and 2383 reactions, which is of size of real problems.
-The expected outcome is to find 115 blocked metabollites in the network, namely, 1553 non-blocked metabolites. The following table shows running time comparison between GAMS and GapFindFill.jl on gap finding.
+For `find_gaps,` the testing example contains 1668 compounds and 2383 reactions, which is of the size of real problems.
+The expected outcome is to find 115 blocked metabolites in the network, namely, 1553 non-blocked metabolites. The following table shows a run-time comparison between GAMS and GapFindFill.jl on gap finding.
 
 Software | Solver | Running time (s)
 :--- | :--- | :---
@@ -77,11 +72,9 @@ GAMS | Gurobi | 0.6
 GapFindFill.jl | CPLEX | 68.4
 GapFindFill.jl | Gurobi | 64.5
 
-GAMS is pretty fast in solving large size problems like the testing example, but GapFindFill.jl finished the job in less than 2 mins, which is also acceptable for real problems as large as this example.
-Using either Gurobi or CPLEX in GapFindFill.jl did not make much difference in running time, while GLPK was unable to solve the testing example within 1 hr.
-Thus, although *find_gaps* allows users to specify GLPK as the solver, it is recommended only for small-scale problems.
+GAMS is fast in solving large-size problems like the testing example, but GapFindFill.jl finished the job in less than 2 minutes, which is also acceptable for real problems as large as this example. Using either Gurobi or CPLEX in GapFindFill.jl did not make much difference in running time, while GLPK was unable to solve the testing example within 1 hour. Thus, although `find_gaps` allows users to specify GLPK as the solver, it is recommended only for small-scale problems.
 
-For *fill_gaps_min*, the testing example contains 1822 compounds and 2888 reactions, which is also of size of real problems. Five no-production-metabolites were chosen as testing cases. The expected outcomes are summarized in the following table.
+For `fill_gaps_min,` the testing example contains 1822 compounds and 2888 reactions. The outcomes are summarized in the following table:
 
 No-production-metabolite | Solution 1 | Solution 2
 :--- | :--- | :---
@@ -91,19 +84,18 @@ alatrna[c] | TRNAALA_t & EX_TRNAALA(e) | ALATRNA_t & EX_ALATRNA(e)
 2dr5p[c] | DRIB_t & EX_DRIB(e) | 2DR5P_t & EX_2DR5P(e)
 4gudbutn[c] | 4GUDBD_t & EX_4GUDBD(e) | 4GUDBUTN_t & EX_4GUDBUTN(e)
 
-The following table shows running time comparison between GAMS and GapFindFill.jl on gap filling.
+The following table shows a run-time comparison between GAMS and GapFindFill.jl on gap filling:
 
 Software | Solver | Running time (s)
 :--- | :--- | :---
 GAMS | Gurobi | 6.2
 GapFindFill.jl | Gurobi | 28.7
 
-The difference between GAMS and GapFindFill.jl is smaller than solving gap finding tasks.
-This is largely because GapFindFill.jl got a speed-up from just-in-time feature of Julia as similar problems were solved repeatedly.
-
+The difference between GAMS and GapFindFill.jl is smaller than solving gap-finding tasks.
+This is largely because GapFindFill.jl benefited from Julia's just-in-time feature, as similar problems were solved repeatedly.
 
 ## API documentation
-Two interfaces are provided, `find_gaps()` and `fill_gaps_min()` for gap finding and filling respectively.
+Two interfaces are provided, `find_gaps()` and `fill_gaps_min()`, for gap finding and filling, respectively.
 
 The `find_gaps()` interface:
 ```julia
@@ -112,29 +104,30 @@ function find_gaps(isRev::Array{Bool}, isCyt::Array{Bool}, isExt::Array{Bool},
     epsilon::Float64 =0.001, bigM::Float64 =1000.0, nonZero::Float64 =1e-8,
     solver::Module=Gurobi)
 ```
-Inputs description:
+
+Input arguments:
 
 Argument | Required | Description
 :--- | :--- | :---
-isRev | yes | true if corresponding reaction is reversible
-isCyt | yes | true if corresponding metabolite is in cytosol
-isExt | yes | true if corresponding metabolite is in extracellular compartment;
+isRev | yes | true if the corresponding reaction is reversible
+isCyt | yes | true if the corresponding metabolite is in the cytosol
+isExt | yes | true if the corresponding metabolite is in the extracellular compartment;
 stoiMatrix | yes | stoichiometric matrix, \|compounds\| * \|reactions\|
 fluxLB | yes | flux lower bound;
 fluxUB | yes | flux upper bound;
 epsilon | optional | minimum amount to be considered active;
 bigM | optional | constant used in MILP model;
 nonZero | optional | minimum stoichiometric coefficient to be considered non-zero;
-solver | optional | CPLEX, Gurobi or GLPK.
+solver | optional | CPLEX, Gurobi, or GLPK.
 
-Outputs description:
+Outputs Description:
 
 Argument | Description
 :--- | :---
 m | the JuMP model;
-objVal | objective value, i.e. number of non-blocked compounds;
+objVal | objective value, i.e., number of non-blocked compounds;
 status | termination status;
-binX | 1 if corresponding compound is non-blocked;
+binX | 1 if the corresponding compound is non-blocked;
 
 The `fill_gaps_min()` interface:
 ```julia
@@ -147,11 +140,11 @@ Inputs description:
 
 Argument | Required | Description
 :--- | :--- | :---
-isMd | yes | true if corresponding reaction is in the model;
-isDb | yes | true if corresponding reaction is in the database, i.e., not in the model;
-isRev | yes | true if corresponding reaction is reversible
-isCyt | yes | true if corresponding metabolite is in cytosol
-isExt | yes | true if corresponding metabolite is in extracellular compartment;
+isMd | yes | true if the corresponding reaction is in the model;
+isDb | yes | true if the corresponding reaction is in the database, i.e., not in the model;
+isRev | yes | true if the corresponding reaction is reversible
+isCyt | yes | true if the corresponding metabolite is in the cytosol
+isExt | yes | true if the corresponding metabolite is in the extracellular compartment;
 noProdID | yes | indices of no-production-metabolites;
 stoiMatrix | yes | stoichiometric matrix, \|compounds\| * \|reactions\|
 fluxLB | yes | flux lower bound;
@@ -160,18 +153,23 @@ epsilon | optional | minimum amount to be considered active;
 bigM | optional | constant used in MILP model;
 nonZero | optional | minimum stoichiometric coefficient to be considered non-zero.
 
-Outputs description:
+Outputs Description:
 
 Argument | Description
 :--- | :---
-results | a dictionary, each key is an index of no-production-mebanolites, each value is a Set containing all possible gap filling ways with minimum number of added reactions.
+results | a dictionary, each key is an index of no-production-metabolites, and each value is a Set containing all possible gap-filling ways with a minimum number of added reactions.
 
 
 ## Reference:
 - Maranas, Costas D., and Ali R. Zomorrodi. Optimization methods in metabolic networks. John Wiley & Sons, 2016.
-- Kumar, Vinay Satish, Madhukar S. Dasika, and Costas D. Maranas. "Optimization based automated curation of metabolic reconstructions." BMC bioinformatics 8.1 (2007): 212.
+- Kumar, Vinay Satish, Madhukar S. Dasika, and Costas D. Maranas. "Optimization-based automated curation of metabolic reconstructions." BMC bioinformatics 8.1 (2007): 212.
 - [GapFind/GapFill](http://www.maranasgroup.com/software.htm) in [GAMS](https://www.gams.com/)
 
 
 ## Support or Contact
-Having trouble at installation or function? Feel free to contact [VarnerLab](https://github.com/varnerlab) or [authors](https://www.cheme.cornell.edu/faculty-directory/jeffrey-d-varner).
+Need help with installation or function? Feel free to contact [VarnerLab](https://github.com/varnerlab) or [authors](https://www.cheme.cornell.edu/faculty-directory/jeffrey-d-varner).
+
+## Funding
+The work described was supported by the [Center on the Physics of Cancer Metabolism at Cornell University](https://psoc.engineering.cornell.edu) through Award Number 1U54CA210184-01 from the [National Cancer Institute](https://www.cancer.gov).
+The content is solely the responsibility of the authors and does not necessarily
+represent the official views of the [National Cancer Institute](https://www.cancer.gov) or the [National Institutes of Health](https://www.nih.gov).  
