@@ -162,7 +162,7 @@ results | a dictionary, each key is an index of no-production-metabolites, and e
 
 ## Reference:
 - Maranas, Costas D., and Ali R. Zomorrodi. Optimization methods in metabolic networks. John Wiley & Sons, 2016.
-- Kumar, Vinay Satish, Madhukar S. Dasika, and Costas D. Maranas. "Optimization-based automated curation of metabolic reconstructions." BMC bioinformatics 8.1 (2007): 212.
+- [Satish Kumar V, Dasika MS, Maranas CD. Optimization based automated curation of metabolic reconstructions. BMC Bioinformatics. 2007 Jun 20;8:212. doi: 10.1186/1471-2105-8-212. PMID: 17584497; PMCID: PMC1933441.](https://pubmed.ncbi.nlm.nih.gov/17584497/)
 - [GapFind/GapFill](http://www.maranasgroup.com/software.htm) in [GAMS](https://www.gams.com/)
 
 
