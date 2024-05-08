@@ -1,10 +1,10 @@
 # GapFindFill.jl Documentation
-- [Statement of need](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#statement-of-need)
-- [Installation instruction](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#installation-instruction)
-- [Example](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#example)
+- [Motivation](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#statement-of-need)
+- [Installation](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#installation-instruction)
+- [Examples](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#example)
 - [API documentation](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#api-documentation)
-- [Reference](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#reference)
-- [Support or Contact](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#support-or-contact)
+- [References](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#reference)
+- [Contact](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#support-or-contact)
 
 
 ## Motivation
