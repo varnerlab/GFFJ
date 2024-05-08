@@ -56,7 +56,7 @@ rm GapFindFill
 ```
 
 
-## Example
+## Examples
 Two examples are provided under [test](https://github.com/varnerlab/GapFindFill/tree/master/test) showing how to use GapFindFill.jl to solve two problems in [Manaras paper]((https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-212)).
 [testGapFind.jl](https://github.com/varnerlab/GapFindFill/blob/master/test/testGapFind.jl) and
 [testGapFill.jl](https://github.com/varnerlab/GapFindFill/blob/master/test/testGapFill.jl) demonstrate how to set up *GapFind* and *GapFill* models, respectively.
