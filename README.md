@@ -7,13 +7,13 @@
 - [Support or Contact](https://github.com/varnerlab/GapFindFill.jl/blob/master/README.md#support-or-contact)
 
 
-## Statement of need
+## Motivation
 The current implementation of `GapFind` and `GapFill` is in GAMS, which charges a significant license fee from each user, even though many solvers are free for academic purposes. To promote the usage of this computational tool, we developed this open-source Julia package, `GapFindFill.jl`, to enable researchers to use *GapFind* and *GapFill* for free by harnessing the power of academic free solvers provided by [Gurobi](https://www.gurobi.com/) and [IBM](https://www.ibm.com/analytics/cplex-optimizer).
 `GapFindFill.jl` is implemented in Julia and makes use of the high-level interface [JuMP.jl](https://github.com/JuliaOpt/JuMP.jl).
 JuMP is a domain-specific modeling language for mathematical optimization embedded in Julia. With JuMP, it is easier for users to specify and call different optimizers to solve optimization problems in `GapFindFill.jl` than using interfaces provided by solvers directly. Built upon the generic high-level programming language Julia, users can embed `GapFindFill.jl` in their complex workflows to simplify task processing. GAMS, as a specific optimization tool, does not provide support for processing other tasks or integrate with other programming languages.
 
 
-## Installation instruction
+## Installation
 To use this package, the user needs to [install Julia](https://julialang.org/downloads/platform.html) first. This version is built on [Julia v1.1](https://julialang.org/downloads/oldreleases.html).
 [Gurobi.jl](https://github.com/JuliaOpt/Gurobi.jl) is used in GapFindFill.jl as the default solver for both gap finding and filling. [Gurobi](http://www.gurobi.com/) provides a free academic license for non-commercial use.
 Users can also choose to use [GLPK.jl](https://github.com/JuliaOpt/GLPK.jl) or [CPLEX.jl](https://github.com/JuliaOpt/CPLEX.jl) for gap finding. GLPK is free for all users, while CPLEX provides a free academic license. But note that compared to Gurobi and CPLEX, it takes GLPK much more time and memory to solve the same problem. For gap filling, Gurobi is set as the only solver since it worked way better than the other two in our tests.
